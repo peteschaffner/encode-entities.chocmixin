@@ -14,5 +14,8 @@
     "decode"
   ],
   "author": "Pete Schaffner",
-  "license": "WTFPL2"
+  "license": "WTFPL2",
+  "dependencies": {
+    "ent": "https://github.com/substack/node-ent/archive/master.tar.gz"
+  }
 }
