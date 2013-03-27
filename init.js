@@ -7,7 +7,7 @@ var ent = require('ent');
 
 // TODO: make encoding of ampersands intelligent
 // (where the "&" in &copy; wouldn't be encoded)
-Hooks.addMenuItem('Text/Convert/Encode HTML Entities', '', function () {
+Hooks.addMenuItem('Text/Convert/Encode HTML Entities', 'cmd-shift-8', function () {
   Recipe.run(function (r) {
     var text = r.textInRange(r.selection),
         encodedText = ent.encode(text).replace(
