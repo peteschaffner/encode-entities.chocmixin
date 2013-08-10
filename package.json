@@ -1,6 +1,6 @@
 {
   "name": "encode-entities",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Encodes/decodes HTML entities",
   "main": "init.js",
   "repository": {
