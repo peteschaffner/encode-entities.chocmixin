@@ -1,38 +1,63 @@
-/*!
- * Encode/decode HTML Entities mixin for Chocolat
- * WTFPL 2 Licensed
+/**
+ * Module dependencies.
  */
 
 var ent = require('ent');
 
-// TODO: make encoding of ampersands intelligent
-// (where the "&" in &copy; wouldn't be encoded)
+
+/**
+ * Encode HTML entities.
+ *
+ * @param {String} text
+ */
+function encode(text) {
+  // Decode the text first to keep from
+  // encoding ampersands in encoded entities
+  text = decode(text);
+  var re = /&(lt|gt|apos|quot|semi|colon|sol|equals);/gi;
+  var encodedText = ent.encode(text)
+    .replace(re, function(match, subMatch) {
+      var entities = {
+        gt: '>',
+        lt: '<',
+        quot: '"',
+        apos: '\'',
+        semi: ';',
+        colon: ':',
+        sol: '/',
+        equals: '='
+      };
+
+      return entities[subMatch];
+    });
+
+  return encodedText;
+}
+
+/**
+ * Decode HTML entities.
+ *
+ * @param {String} s
+ */
+function decode(text) {
+  var decodedText = ent.decode(text);
+
+  return decodedText;
+}
+
+
 Hooks.addMenuItem('Text/Convert/Encode HTML Entities', '', function () {
-  Recipe.run(function (r) {
-    var text = r.textInRange(r.selection),
-        encodedText = ent.encode(text).replace(
-          /&(lt|gt|apos|quot);/gi,
-          function (m, e) {
-            var entities = {
-              "gt"   : ">",
-              "lt"   : "<",
-              "quot" : "\"",
-              "apos" : "'"
-            };
+  Recipe.run(function(r) {
+    var text = r.textInRange(r.selection);
 
-            return entities[e];
-          }
-        );
-
-    r.replaceTextInRange(r.selection, encodedText);
+    r.replaceTextInRange(r.selection, encode(text));
   });
 });
 
 Hooks.addMenuItem('Text/Convert/Decode HTML Entities', '', function () {
-  Recipe.run(function (r) {
-    var text = r.textInRange(r.selection),
-        decodedText = ent.decode(text);
+  Recipe.run(function(r) {
+    var text = r.textInRange(r.selection);
 
-    r.replaceTextInRange(r.selection, decodedText);
+    r.replaceTextInRange(r.selection, decode(text));
   });
 });
