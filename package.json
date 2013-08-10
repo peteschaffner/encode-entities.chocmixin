@@ -16,6 +16,6 @@
   "author": "Pete Schaffner",
   "license": "WTFPL2",
   "dependencies": {
-    "ent": "https://github.com/substack/node-ent/archive/master.tar.gz"
+    "ent": "~0.1.0"
   }
 }
