@@ -38,7 +38,7 @@ function encode(text) {
 /**
  * Decode HTML entities.
  *
- * @param {String} s
+ * @param {String} text
  */
 function decode(text) {
   var decodedText = ent.decode(text);
