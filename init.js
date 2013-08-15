@@ -14,7 +14,7 @@ function encode(text) {
   // Decode the text first to keep from
   // encoding ampersands in encoded entities
   text = decode(text);
-  var re = /&(lt|gt|apos|quot|semi|colon|sol|equals);/gi;
+  var re = /&(lt|gt|apos|quot|semi|colon|sol|equals|comma);/gi;
   var encodedText = ent.encode(text)
     .replace(re, function(match, subMatch) {
       var entities = {
@@ -25,7 +25,8 @@ function encode(text) {
         semi: ';',
         colon: ':',
         sol: '/',
-        equals: '='
+        equals: '=',
+        comma: ','
       };
 
       return entities[subMatch];
